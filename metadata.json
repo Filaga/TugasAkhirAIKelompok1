@@ -1,0 +1,215 @@
+{
+  "kode_kelompok": "K01",
+  "topik_pilihan": 5,
+  "nama_topik": "Reinforcement Learning",
+  "judul_proyek": "Optimisasi Kendali Pendaratan Wahana Antariksa Menggunakan Deep Q-Network (DQN) pada Lingkungan Simulasi LunarLander-v3",
+  "abstrak_singkat": "Proyek ini mengimplementasikan metode Reinforcement Learning (RL) menggunakan algoritma Deep Q-Network (DQN) untuk memecahkan masalah kendali pendaratan wahana antariksa pada lingkungan simulasi LunarLander-v3 dari Gymnasium. Agen dilatih menggunakan arsitektur Multi-Layer Perceptron (MLP) dengan PyTorch dan memanfaatkan Replay Buffer selama 500 episode. Hasil sementara menunjukkan peningkatan skor signifikan dari baseline tindakan acak (-248.56) menjadi +129.45 (mampu mendarat dengan aman walau terkena penalti bahan bakar). Progres saat ini mencapai 85% dengan fokus pada analisis limitasi dan pelatihan lanjutan.",
+  
+  "metode_ai": [
+    {
+      "nama": "Deep Q-Network (DQN)",
+      "peran": "utama",
+      "varian": "DQN dengan Experience Replay Buffer dan Target Network",
+      "catatan": "Algoritma utama yang digunakan. Diimplementasikan menggunakan MLP dengan struktur: Input(8) -> Hidden 1(64, ReLU) -> Hidden 2(64, ReLU) -> Output(4). Menggunakan optimisasi Adam dan MSELoss."
+    },
+    {
+      "nama": "Random Policy",
+      "peran": "baseline",
+      "varian": "Pemilihan aksi diskrit secara acak (heuristic pembanding)",
+      "catatan": "Pembanding baseline untuk mengukur seberapa besar peningkatan performa DQN. Mencatat skor rata-rata -248.56 (roket selalu meledak)."
+    }
+  ],
+
+  "frameworks": [
+    {
+        "nama": "PyTorch",
+        "versi": "2.10.0+cu128",
+        "kegunaan": "Implementasi arsitektur neural network (torch.nn), tensor dinamis, custom training loop, dan loss calculation."
+    },
+    {
+        "nama": "Gymnasium",
+        "versi": "1.3.0",
+        "kegunaan": "Interface simulasi environment (LunarLander-v3) menyediakan state observasi berdimensi 8 dan action space berdimensi 4. (Menggunakan box2d versi 2.3.10)"
+    },
+    {
+        "nama": "Matplotlib",
+        "versi": "3.10.0",
+        "kegunaan": "Visualisasi grafik metrik kinerja reward (termasuk Moving Average)."
+    },
+    {
+        "nama": "Pandas",
+        "versi": "2.2.2",
+        "kegunaan": "Ekstraksi, rekam jejak, dan perhitungan moving average dari histori reward agen."
+    },
+    {
+        "nama": "NumPy",
+        "versi": "2.0.2",
+        "kegunaan": "Manipulasi array numerik dan struktur data pendukung untuk environment dan kalkulasi matriks."
+    }
+],
+
+  "datasets": [
+    {
+      "nama": "LunarLander-v3",
+      "tipe": "environment",
+      "sumber": "Gymnasium (Farama Foundation)",
+      "url_sumber_publik": "https://gymnasium.farama.org/environments/box2d/lunar_lander/",
+      "jumlah_sampel": 0,
+      "jumlah_kelas": 0,
+      "proses_akuisisi_mandiri": "",
+      "peran_di_proyek": "Pre-built environment utama untuk melatih dan mengevaluasi agen DQN tanpa memerlukan dataset statis.",
+      "spek_rl": {
+        "state_space": "Vektor kontinu berdimensi 8 (koordinat, kecepatan, sudut rotasi)",
+        "action_space": "Diskrit berdimensi 4 (diam, mesin kiri, mesin bawah, mesin kanan)",
+        "reward_function": "Skor kumulatif hingga poin sempurna (+200) untuk pendaratan sukses, dengan penalti (-0.3) per manuver/nyala mesin.",
+        "max_episode_steps": "1000",
+        "framework_env": "Gymnasium (paket box2d)",
+        "modifikasi_tim": "State mentah dikonversi menjadi tensor PyTorch (torch.float32) secara dinamis on-the-fly."
+      }
+    }
+  ],
+
+  "metrik_utama": [
+    "Skor rata-rata (cumulative reward) per episode",
+    "Kemampuan pendaratan aman (Status Target)",
+    "Efisiensi penggunaan bahan bakar (manuver)"
+  ],
+
+  "klaim_bonus": [
+    "B1",
+    "B3"
+  ],
+
+  "anggota": [
+    {
+      "nama": "Alfonsus Tanara Gultom",
+      "npm": "2306267126",
+      "peran_utama": "Environment Setup & Baseline Evaluator",
+      "focus_area": [
+        "Setup instalasi Gymnasium[box2d]",
+        "Deteksi GPU Cuda di Colab",
+        "Perancangan Baseline Model (Random Policy)",
+        "Pengumpulan data metrik baseline"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Environment initialization dan dependency management di Colab",
+        "Implementasi action space diskrit acak di Gymnasium"
+      ],
+      "konsep_dikuasai_teori": [
+        "Metodologi komparasi performa model melalui pembentukan metrik baseline"
+      ],
+      "bagian_laporan": [
+        "Bagian analisis data skor rata-rata model baseline (-248.56)"
+      ],
+      "bagian_kode": [
+        "Modul instalasi Gymnasium",
+        "Script algoritma random policy"
+      ]
+    },
+    {
+      "nama": "Farhan Ramadhani Zakiyyandi",
+      "npm": "2306220412",
+      "peran_utama": "Architecture Engineer",
+      "focus_area": [
+        "Penyusunan struktur modul PyTorch (torch.nn)",
+        "Pengembangan kelas QNetwork",
+        "Perancangan ReplayBuffer",
+        "Verifikasi kompatibilitas dimensi state dan aksi"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Multi-Layer Perceptron (MLP) dengan hidden layer dan aktivasi ReLU",
+        "Penggunaan collections.deque untuk memori experience replay",
+        "Pemetaan tensor PyTorch input (8 neuron) ke output (4 neuron)"
+      ],
+      "konsep_dikuasai_teori": [
+        "Value-based reinforcement learning fundamentals",
+        "Mekanisme Experience Replay Buffer untuk menstabilkan training"
+      ],
+      "bagian_laporan": [
+        "Bab 2.2 Arsitektur Model yang Dipilih"
+      ],
+      "bagian_kode": [
+        "Class QNetwork",
+        "Class ReplayBuffer"
+      ]
+    },
+    {
+      "nama": "Naufal Febriyanto",
+      "npm": "2106702674",
+      "peran_utama": "Training Pipeline Engineer",
+      "focus_area": [
+        "Pembuatan logika Training Loop utama",
+        "Pengaturan Hyperparameter (Epsilon, Gamma, LR)",
+        "Pembaruan Target Network",
+        "Monitoring performa training"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Custom training loop di PyTorch (forward pass, loss calc, backward pass)",
+        "Optimisasi model menggunakan Adam dan MSELoss",
+        "Epsilon decay implementation (Eksplorasi vs Eksploitasi)",
+        "Penyimpanan bobot model .pth (model_roket_pintar.pth)"
+      ],
+      "konsep_dikuasai_teori": [
+        "Fungsi Q-value update dan Bellman Equation",
+        "Deteksi konvergensi palsu selama training",
+        "Peran discount factor (Gamma) dan Learning Rate"
+      ],
+      "bagian_laporan": [
+        "Bab 3.3 Implementasi Model"
+      ],
+      "bagian_kode": [
+        "Modul custom training loop",
+        "Fungsi pembaruan target network"
+      ]
+    },
+    {
+      "nama": "Filaga Tifira Muthi",
+      "npm": "2306280445",
+      "peran_utama": "Evaluator & Report Documenter",
+      "focus_area": [
+        "Ekstraksi dan logging histori reward",
+        "Visualisasi metrik kinerja",
+        "Analisis limitasi kegagalan pendaratan",
+        "Kompilasi dokumen Progress Report"
+      ],
+      "konsep_dikuasai_implementasi": [
+        "Tracking eksperimen menggunakan array variabel",
+        "Plotting trend konvergensi dengan Matplotlib",
+        "Perhitungan agregat statistik (Moving Average 50 Episode) dengan Pandas",
+        "Penyusunan format dokumen teknis (LaTeX/JSON)"
+      ],
+      "konsep_dikuasai_teori": [
+        "Interpretasi grafik performa (smooth learning curve)",
+        "Analisis trade-off antara manuver keseimbangan dan efisiensi penalti BBM dalam environment"
+      ],
+      "bagian_laporan": [
+        "Bab 3.4 Hasil Eksperimen Sementara",
+        "Kompilasi File Progress Report Keseluruhan"
+      ],
+      "bagian_kode": [
+        "Modul log/visualisasi"
+      ]
+    }
+  ],
+
+  "tautan": {
+    "github": "https://github.com/Filaga/TugasAkhirAIKelompok1",
+    "colab": "https://colab.research.google.com/drive/1VS_n0u0OZrGyORAXrMR27zMaqJeqMDOg?usp=sharing",
+    "dataset_mandiri": "https://gymnasium.farama.org/environments/box2d/lunar_lander/",
+    "video_demo": null
+  },
+
+  "ai_assistant_usage": {
+    "digunakan": true,
+    "tools": [
+      "Gemini (Model 3.1 Pro)"
+    ],
+    "bagian": [
+      "Mencari command dependencies linux (swig) agar engine Box2D bisa ter-install di Colab",
+      "Referensi implementasi syntax ReplayBuffer yang efisien",
+      "Referensi dokumentasi dan fungsi PyTorch",
+      "Proofreading tata bahasa akademis pada dokumen LaTeX (Progress Report)"
+    ],
+    "estimasi_persentase": 25
+  }
+}
