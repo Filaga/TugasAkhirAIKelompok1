@@ -206,10 +206,11 @@
     ],
     "bagian": [
       "Mencari command dependencies linux (swig) agar engine Box2D bisa ter-install di Colab",
+      "Membantu penulisan kode",
       "Referensi implementasi syntax ReplayBuffer yang efisien",
       "Referensi dokumentasi dan fungsi PyTorch",
       "Proofreading tata bahasa akademis pada dokumen LaTeX (Progress Report)"
     ],
-    "estimasi_persentase": 25
+    "estimasi_persentase": 35
   }
 }
