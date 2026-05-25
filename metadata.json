@@ -3,7 +3,8 @@
   "topik_pilihan": 5,
   "nama_topik": "Reinforcement Learning",
   "judul_proyek": "Optimisasi Kendali Pendaratan Wahana Antariksa Menggunakan Deep Q-Network (DQN) pada Lingkungan Simulasi LunarLander-v3",
-  "abstrak_singkat": "Proyek ini mengimplementasikan metode Reinforcement Learning (RL) menggunakan algoritma Deep Q-Network (DQN) untuk memecahkan masalah kendali pendaratan wahana antariksa pada lingkungan simulasi LunarLander-v3 dari Gymnasium. Agen dilatih menggunakan arsitektur Multi-Layer Perceptron (MLP) dengan PyTorch dan memanfaatkan Replay Buffer selama 500 episode. Hasil sementara menunjukkan peningkatan skor signifikan dari baseline tindakan acak (-248.56) menjadi +129.45 (mampu mendarat dengan aman walau terkena penalti bahan bakar). Progres saat ini mencapai 85% dengan fokus pada analisis limitasi dan pelatihan lanjutan.",
+  "abstrak_singkat": "Proyek ini mengimplementasikan metode Reinforcement Learning (RL) menggunakan algoritma Deep Q-Network (DQN) untuk memecahkan masalah kendali pendaratan wahana antariksa pada lingkungan simulasi LunarLander-v3 dari Gymnasium. Agen dilatih menggunakan arsitektur Multi-Layer Perceptron (MLP) dengan PyTorch dan memanfaatkan Replay Buffer. Hasil akhir setelah pelatihan 500 episode menunjukkan peningkatan skor signifikan dari model tindakan acak (-248.56) menjadi agen yang mampu mendarat dengan aman (+129.45). Keterbatasan agen murni karena penalti bahan bakar akibat manuver yang terlalu berhati-hati.",
+  "status_progress": "Selesai 100%. Training model mencapai 500 episode dan Laporan Akhir telah disusun.",
   
   "metode_ai": [
     {
@@ -46,7 +47,7 @@
         "versi": "2.0.2",
         "kegunaan": "Manipulasi array numerik dan struktur data pendukung untuk environment dan kalkulasi matriks."
     }
-],
+  ],
 
   "datasets": [
     {
@@ -92,11 +93,11 @@
         "Pengumpulan data metrik baseline"
       ],
       "konsep_dikuasai_implementasi": [
-        "Environment initialization dan dependency management di Colab",
-        "Implementasi action space diskrit acak di Gymnasium"
+        "Menyiapkan environment Gymnasium dan library pendukung di Google Colab",
+        "Membuat agen dasar yang bergerak secara acak (random action)"
       ],
       "konsep_dikuasai_teori": [
-        "Metodologi komparasi performa model melalui pembentukan metrik baseline"
+        "Alasan mengapa kita perlu membuat model acak (baseline) sebagai pembanding kinerja AI"
       ],
       "bagian_laporan": [
         "Bagian analisis data skor rata-rata model baseline (-248.56)"
@@ -117,13 +118,13 @@
         "Verifikasi kompatibilitas dimensi state dan aksi"
       ],
       "konsep_dikuasai_implementasi": [
-        "Multi-Layer Perceptron (MLP) dengan hidden layer dan aktivasi ReLU",
-        "Penggunaan collections.deque untuk memori experience replay",
-        "Pemetaan tensor PyTorch input (8 neuron) ke output (4 neuron)"
+        "Membuat arsitektur Neural Network sederhana dengan fungsi aktivasi ReLU",
+        "Membuat Replay Buffer menggunakan struktur data antrean (deque)",
+        "Menyesuaikan jumlah input (8 sensor roket) ke output (4 tombol mesin)"
       ],
       "konsep_dikuasai_teori": [
-        "Value-based reinforcement learning fundamentals",
-        "Mekanisme Experience Replay Buffer untuk menstabilkan training"
+        "Konsep dasar Reinforcement Learning berbasis skor (Q-Learning)",
+        "Tujuan Replay Buffer agar agen AI bisa mengingat dan belajar dari pengalaman masa lalu"
       ],
       "bagian_laporan": [
         "Bab 2.2 Arsitektur Model yang Dipilih"
@@ -144,15 +145,15 @@
         "Monitoring performa training"
       ],
       "konsep_dikuasai_implementasi": [
-        "Custom training loop di PyTorch (forward pass, loss calc, backward pass)",
-        "Optimisasi model menggunakan Adam dan MSELoss",
-        "Epsilon decay implementation (Eksplorasi vs Eksploitasi)",
-        "Penyimpanan bobot model .pth (model_roket_pintar.pth)"
+        "Membuat siklus training PyTorch (menghitung error/loss dan perbarui bobot)",
+        "Menggunakan optimizer Adam dan fungsi error MSE",
+        "Mengatur penurunan nilai Epsilon agar AI beralih dari mode acak ke mode pintar",
+        "Menyimpan hasil training model ke dalam file .pth"
       ],
       "konsep_dikuasai_teori": [
-        "Fungsi Q-value update dan Bellman Equation",
-        "Deteksi konvergensi palsu selama training",
-        "Peran discount factor (Gamma) dan Learning Rate"
+        "Logika dasar Persamaan Bellman untuk memperbarui nilai Q-value",
+        "Fungsi parameter Gamma (melihat masa depan) dan Learning Rate (kecepatan belajar)",
+        "Alasan perlunya membedakan target network dan policy network agar AI tidak bingung"
       ],
       "bagian_laporan": [
         "Bab 3.3 Implementasi Model"
@@ -173,14 +174,14 @@
         "Kompilasi dokumen Progress Report"
       ],
       "konsep_dikuasai_implementasi": [
-        "Tracking eksperimen menggunakan array variabel",
-        "Plotting trend konvergensi dengan Matplotlib",
-        "Perhitungan agregat statistik (Moving Average 50 Episode) dengan Pandas",
-        "Penyusunan format dokumen teknis (LaTeX/JSON)"
+        "Menyimpan riwayat skor per episode ke dalam bentuk list/array",
+        "Membuat grafik perkembangan AI menggunakan Matplotlib",
+        "Menghitung rata-rata pergerakan skor (Moving Average) menggunakan Pandas",
+        "Menulis laporan akademis menggunakan format LaTeX"
       ],
       "konsep_dikuasai_teori": [
-        "Interpretasi grafik performa (smooth learning curve)",
-        "Analisis trade-off antara manuver keseimbangan dan efisiensi penalti BBM dalam environment"
+        "Cara membaca dan menyimpulkan apakah AI berhasil belajar dari bentuk grafik",
+        "Analisis mengapa roket terlalu berhati-hati dan boros bahan bakar (trade-off keselamatan vs efisiensi)"
       ],
       "bagian_laporan": [
         "Bab 3.4 Hasil Eksperimen Sementara",
@@ -195,7 +196,7 @@
   "tautan": {
     "github": "https://github.com/Filaga/TugasAkhirAIKelompok1",
     "colab": "https://colab.research.google.com/drive/1VS_n0u0OZrGyORAXrMR27zMaqJeqMDOg?usp=sharing",
-    "dataset_mandiri": "https://gymnasium.farama.org/environments/box2d/lunar_lander/",
+    "dataset": "https://gymnasium.farama.org/environments/box2d/lunar_lander/",
     "video_demo": null
   },
 
@@ -207,10 +208,11 @@
     "bagian": [
       "Mencari command dependencies linux (swig) agar engine Box2D bisa ter-install di Colab",
       "Membantu penulisan kode",
+      "Membantu penulisan report",
       "Referensi implementasi syntax ReplayBuffer yang efisien",
       "Referensi dokumentasi dan fungsi PyTorch",
-      "Proofreading tata bahasa akademis pada dokumen LaTeX (Progress Report)"
+      "Proofreading tata bahasa akademis pada dokumen LaTeX (Laporan Akhir)"
     ],
-    "estimasi_persentase": 35
+    "estimasi_persentase": 40
   }
 }
