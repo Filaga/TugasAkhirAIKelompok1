@@ -196,7 +196,7 @@
   "tautan": {
     "github": "https://github.com/Filaga/TugasAkhirAIKelompok1",
     "colab": "https://colab.research.google.com/drive/1VS_n0u0OZrGyORAXrMR27zMaqJeqMDOg?usp=sharing",
-    "dataset": "https://gymnasium.farama.org/environments/box2d/lunar_lander/",
+    "dataset_mandiri": null,
     "video_demo": null
   },
 
